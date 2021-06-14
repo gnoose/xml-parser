@@ -33,7 +33,8 @@ export class AppComponent {
 
   files: File[] = [];
   jsonObj: any;
-  format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  // format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  format = /[`!@#$%^&*_+\-=\[\]{};'"\\|<>~]/;
 
   constructor(
     private translatorService: TranslatorService
@@ -55,12 +56,38 @@ export class AppComponent {
       setTimeout(async () => {
         this.isLoading = true;
         const contentStr = fileReader.result as string;
-        this.jsonObj = parser.parse(contentStr, this.options);
-        this.jsonObj = await this.fixup(this.jsonObj, 'Value', 'XXXXXXXXX');
-        this.downloadString(JSON.stringify(this.jsonObj), 'text/xml', file.name);
+        console.log('contentStr = ', contentStr);
+        const parser = new DOMParser();
+        let dom = parser.parseFromString(contentStr, "application/xml");
+        await this.replaceUp(dom.documentElement, 'Value', 'XXXX');
+        // TODO: In order to do with JSON content
+        // this.jsonObj = parser.parse(contentStr, this.options);
+        // this.jsonObj = await this.fixup(this.jsonObj, 'Value', 'XXXXXXXXX');
+        // this.downloadString(JSON.stringify(this.jsonObj), 'text/xml', file.name);
+        const xmlStr = new XMLSerializer().serializeToString(dom);
+        this.downloadString(xmlStr,  'text/xml', file.name);
         this.isLoading = false;
       }, 300);
     }
+  }
+
+  async replaceUp(xmlDoc: any, tKey: any, value: any): Promise<any> {
+    let node, childNodes = xmlDoc.childNodes;
+    for(let i = 0; i < childNodes.length; i++)
+    {
+      node = childNodes[i];
+      if (!node.childElementCount) {
+        if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === tKey) {
+          if (!this.format.test(node.textContent) && node.textContent) {
+            const res = await this.translatorService.translate(node.textContent).toPromise();
+            node.textContent = res.text;
+          }
+        }
+      } else {
+        node = await this.replaceUp(node, tKey, value);
+      }
+    }
+    return node;
   }
 
   downloadString(text: any, fileType: string, fileName: string) {
