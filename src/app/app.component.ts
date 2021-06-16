@@ -34,7 +34,7 @@ export class AppComponent {
   files: File[] = [];
   jsonObj: any;
   // format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  format = /[`!@#$%^&*_+\-=\[\]{};'"\\|<>~]/;
+  format = /[`!@#$%^&*_+\-=\[\]{};"\\|,<>~]/;
 
   constructor(
     private translatorService: TranslatorService
