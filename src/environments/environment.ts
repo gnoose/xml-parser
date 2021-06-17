@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'https://xml-parser-api.herokuapp.com/'
-  // api: 'http://localhost:3000/'
+  api: 'http://localhost:3000/'
 };
 
 /*
