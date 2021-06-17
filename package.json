@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -20,6 +20,7 @@
     "@angular/router": "~12.0.4",
     "@types/he": "^1.1.1",
     "@types/xml2js": "^0.4.8",
+    "express": "^4.17.1",
     "fast-xml-parser": "^3.19.0",
     "he": "^1.2.0",
     "rxjs": "~6.6.0",
