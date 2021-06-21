@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import * as parser from 'fast-xml-parser';
 import * as he from 'he';
+
 import { TranslatorService } from './services/translator.service';
 
 @Component({
@@ -34,7 +34,7 @@ export class AppComponent {
   files: File[] = [];
   jsonObj: any;
   // format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  format = /[`@#$%^&*_+=\[\]{};"\\|,<>~]/;
+  format = /[`@#$%^&*_+=\[\]{};"\\|<>~]/;
 
   constructor(
     private translatorService: TranslatorService
