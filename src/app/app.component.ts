@@ -34,7 +34,7 @@ export class AppComponent {
   files: File[] = [];
   jsonObj: any;
   // format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  format = /[`@#$%^&*+=\[\]{}"|<>~]/;
+  format = /[`*+=\[\]{}|<>]/;
 
   constructor(
     private translatorService: TranslatorService
@@ -78,7 +78,7 @@ export class AppComponent {
       node = childNodes[i];
       if (!node.childElementCount) {
         if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === tKey) {
-          if (!this.format.test(node.textContent) && node.textContent) {
+          if (!this.format.test(node.textContent) && node.textContent && !node.textContent.toLowerCase().includes('.val')) {
             const res = await this.translatorService.translate(node.textContent).toPromise();
             node.textContent = res.text;
           }
