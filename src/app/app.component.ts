@@ -35,7 +35,7 @@ export class AppComponent {
   jsonObj: any;
   // format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
   format = /[`*+=\[\]{}|]/;
-  replaceList = ['&lt;ul&gt;', '&lt;li&gt;', '&lt;/li&gt;', '&lt;/ul&gt;', '&lt;br&gt;', '<ul>', '</ul>', '</li>', '</ul>'];
+  replaceList = ['&lt;ul&gt;', '&lt;li&gt;', '&lt;/li&gt;', '&lt;/ul&gt;', '&lt;br&gt;', '<ul>', '<li>', '</li>', '</ul>', '<br>'];
 
   constructor(
     private translatorService: TranslatorService
