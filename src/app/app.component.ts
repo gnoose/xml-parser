@@ -35,6 +35,7 @@ export class AppComponent {
   jsonObj: any;
   // format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
   format = /[`*+=\[\]{}|]/;
+  replaceList = ['&lt;ul&gt;', '&lt;li&gt;', '&lt;/li&gt;', '&lt;/ul&gt;', '&lt;br&gt;'];
 
   constructor(
     private translatorService: TranslatorService
@@ -79,7 +80,11 @@ export class AppComponent {
       if (!node.childElementCount) {
         if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === tKey) {
           if (!this.format.test(node.textContent) && node.textContent && !node.textContent.toLowerCase().includes('.val')) {
-            const res = await this.translatorService.translate(node.textContent).toPromise();
+            let str = node.textContent;
+            for(let replaceIndex = 0; replaceIndex < this.replaceList.length; replaceIndex ++) {
+              str = str.replace(this.replaceList[replaceIndex], '');
+            }
+            const res = await this.translatorService.translate(str).toPromise();
             node.textContent = res.text;
           }
         }
