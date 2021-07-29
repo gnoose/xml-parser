@@ -1,0 +1,22 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block {
+  max-width: 300px;
+  max-height: 300px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 40px;
+}
+
+.loading {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+}

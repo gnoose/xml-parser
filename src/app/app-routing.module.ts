@@ -1,7 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { LoginComponent } from './login/login.component';
+import { XmlParserComponent } from './xml-parser/xml-parser.component';
+import { AuthGuard } from './core/guard/auth.guard';
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'xml-parser',
+    component: XmlParserComponent,
+    canActivate: [AuthGuard]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

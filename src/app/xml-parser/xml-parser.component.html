@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="block">
+    <label id="lbl">Select Files </label>
+    <input [multiple]="true" type='file' (change)="fileChanged($event)">
+    <button (click)="uploadDocument()">Start Parse</button>
+  </div>
+</div>
+
+<div class="loading" *ngIf="isLoading">
+  Loading now...
+</div>

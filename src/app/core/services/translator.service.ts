@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 
-import { environment } from '../../environments/environment';
-import { tap } from 'rxjs/operators';
-import { TranslateModel } from '../core/model/translate.model';
+import { environment } from '../../../environments/environment';
+import { TranslateModel } from '../model/translate.model';
 
 @Injectable({
   providedIn: 'root'
